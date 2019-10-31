@@ -1,0 +1,341 @@
+﻿@model UniversityMvcApp.Models.AllocateClassRoom
+
+@{
+    ViewBag.Title = "Create";
+    string Errormessage = ViewBag.Errormessage;
+    string allocatedMessage = ViewBag.allocatedMessage;
+}
+<style>
+    body {
+        background-image: url('../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+</style>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/jonthornton-jquery-timepicker-0e3e903/jquery.timepicker.css" rel="stylesheet" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+
+@*@{
+        if (TempData["Addx"] != null)
+        {
+            <script type="text/javascript">
+
+                alert(@Html.Raw(Json.Encode(TempData["Add"])));
+
+            </script>
+        }
+    }*@
+
+
+<h2>AllocateClassRoom</h2>
+@if (Errormessage != null)
+{
+    <label>@Errormessage</label>
+}
+@if (allocatedMessage != null)
+{
+    <label>@allocatedMessage</label>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("Department Code", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @{
+                    var dep = ViewData["DepartmentData"];
+                    var cou = ViewData["CourseData"];
+                    var sub = ViewData["subjectData"];
+                    var roo = ViewData["roomData"];
+                    var day = ViewData["DayValue"];
+                }
+
+
+
+
+                <select name="DepartmentId" id="DepartmentId">
+                    <option>@dep</option>
+                    @foreach (var department in ViewBag.DepartmentId)
+                    {
+                        <option value="@department.ID">@department.Code</option>
+                    }
+
+                </select>
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Course Code", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="CourseId" id="CourseId"><option>@cou</option></select>
+
+                @*@Html.DropDownList("CourseId")*@
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Subject Code", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="SubjectID" id="SubjectID"><option>@sub</option></select>
+                @*@Html.DropDownList("CourseId")*@
+                @Html.ValidationMessageFor(model => model.SubjectID)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.RoomId, "Lecture Place", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownList("RoomId", "--Select--")
+                    @Html.ValidationMessageFor(model => model.RoomId)
+                </div>
+            </div>*@
+
+
+        @*<select name="DepartmentId" id="DepartmentId">
+                <option>@dep</option>
+                @foreach (var department in ViewBag.DepartmentId)
+                {
+                    <option value="@department.ID">@department.Code</option>
+                }
+
+            </select>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoomId, "Lecture Place", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                <select name="RoomId" id="RoomId">
+                    <option>@roo</option>
+                    @foreach (var room in ViewBag.RoomId)
+                    {
+                        <option value="@room.Id">@room.RoomNo</option>
+                    }
+
+                </select>
+                @Html.ValidationMessageFor(model => model.RoomId)
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.date, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.date, new { @id = "Date" })
+                @Html.ValidationMessageFor(model => model.date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="Day" id="Day">
+                    <option>@day</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thrusday">Thrusday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Day)
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.From, new { @class = "From" })
+                @Html.ValidationMessageFor(model => model.From)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.To, new { @class = "To" })
+                @Html.ValidationMessageFor(model => model.To)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script>
+
+        //$(function () {
+        //    $("#Date").datepicker();
+        //});
+
+        $(function () {
+            $("#Date").datepicker({ dateFormat: 'dd-mm-yy' }).val;
+        });
+
+
+
+        $('.From,.To').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '8',
+            maxTime: '6:00pm',
+            defaultTime: '8',
+            startTime: '8:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+
+        $(document).ready(function () {
+            //var table = $("#myTable").DataTable();
+            $("#DepartmentId").change(function () {
+                var deptId = $("#DepartmentId").val();
+                //$("#myTable").show();
+                //table.clear().draw(false);
+                //$("#tableBody").empty();
+                $("#CourseId").empty();
+                $("#CourseId").append('<option value="">Select</option>');
+                var json = { DepartmentId: deptId };
+                //alert(deptId);
+                $.ajax({
+                    type: "POST",
+                    url: '/AllocateClassRooms/GetCourseByDepartmentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+                        //alert(data);
+                        $.each(data, function (key, value) {
+
+                            //alert(key);
+                            $("#CourseId").append('<option value="' + value.Id + '">'
+                                + value.Code + '</option>');
+                            //$("#tableBody").append('<tr><td>' + value.StudentId + '</td><td>' + value.Name + '</td><td>' + value.DepartmentId + '</td></tr>');
+                            //table.row.add([
+                            //    value.StudentId, value.Name, value.DepartmentId
+                            //]).draw(false);
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            //var table = $("#myTable").DataTable();
+            $("#CourseId").change(function () {
+                var courId = $("#CourseId").val();
+                //$("#myTable").show();
+                //table.clear().draw(false);
+                //$("#tableBody").empty();
+                $("#SubjectID").empty();
+                $("#SubjectID").append('<option value="">Select</option>');
+                var json = { CourseId: courId };
+                //alert(deptId);
+                $.ajax({
+                    type: "POST",
+                    //url: '@Url.Action("GetSubjectByCourseId", "AllocateClassRooms")',
+                    url: '/AllocateClassRooms/GetSubjectByCourseId',
+                        contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(json),
+                                success: function (data) {
+                                    //alert(data);
+                                    $.each(data, function (key, value) {
+
+                                        //alert(key);
+                                        $("#SubjectID").append('<option value="' + value.SubjectID + '">' + value.Code + '</option>');
+                                        //$("#tableBody").append('<tr><td>' + value.StudentId + '</td><td>' + value.Name + '</td><td>' + value.DepartmentId + '</td></tr>');
+                                        //table.row.add([
+                                        //    value.StudentId, value.Name, value.DepartmentId
+                                        //]).draw(false);
+                                    });
+                                }
+            });
+        });
+    });
+
+
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<RMS2.Models.Order>
+
+@{
+    ViewBag.Title = "ViewOrders";
+    Layout = "~/Views/Shared/_CustomerAdminLayoutPage.cshtml";
+}
+
+<div class="app-title">
+    <div>
+        <h1><i class="fa fa-dashboard"></i> Orders</h1>
+        <p>Employee Details</p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a href="#">Orders</a></li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalMoney)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalMoney)
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="#" data-toggle="tooltip" data-placement="left" title="View" onclick="print(@item.OrderID)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+         var print = function (orderId) {
+            var url = '@Url.Action("Print", "CustomerAdmin")?id=' + orderId;
+
+            $("#popupModalPrintDiv").load(url, function () {
+                $('#modalTitle').text('Your Orders');
+                $("#printModal").modal('show');
+            })
+        }
+    </script>
+
+}
+
+<!--Print View Popup Modal-->
+<div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="popupModalPrintDiv">
+                @*popupPV*@
+            </div>
+        </div>
+    </div>
+</div>

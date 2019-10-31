@@ -1,0 +1,179 @@
+﻿@model UniversityMvcApp.Models.Department
+@{
+    ViewBag.Title = "Create";
+    string existMessage = @ViewBag.ExistMessage;
+    string sweetaleart = ViewBag.Sweetaleart;
+
+}
+<style>
+    body {
+        background-image: url('../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+</style>
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+
+@*@if (sweetaleart != null)
+{{ }*@
+<script type="text/javascript">
+
+   // function successalert5(this) {}
+   
+
+    function validateData() {
+
+        if ($("#Code").val() == "") {
+            swal("Please enter DeparmentCode !");
+            return false;
+        } else if ($("#Name").val() == "") {
+            swal("Please enter DepartmentName !");
+            return false;
+        } else {
+            return true;
+        }
+    }  
+
+
+    function successalert5(ctl, event) {
+        event.preventDefault();
+        if (validateData() == true)
+        {
+            $("#CreateForm").submit();
+
+            swal(
+                {
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'You are successfully Added',
+
+                    text: 'Thank You!',
+                    icon: "success",
+                    button: "OK",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: false,
+                    timer: 4500 
+
+                },
+                function () {
+                    window.location.href = '@Url.Action("Create", "Department")';
+
+                });
+
+        } else {
+            swal("Cancelled", "Please enter proper data", "error");
+        } 
+    }
+
+
+</script>
+
+<h2>Save Department</h2>
+
+@if (existMessage != null)
+{
+    <label class="label label-warning">@existMessage</label>
+}
+@if (ViewBag.Message != null)
+{
+    <span class="success sweet-alert"> @ViewBag.Message</span>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new
+{
+    id = "CreateForm"
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Code)
+                @Html.ValidationMessageFor(model => model.Code)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { @class = "form-group mx-sm-3 mb-2" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" id="Submit"  onclick="successalert5(this, event);"  class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+    
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

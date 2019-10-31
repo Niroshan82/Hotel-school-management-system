@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RMS2.Models.OrderDetails>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <section class="invoice">
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <h2 class="page-header"><i class="fa fa-globe"></i> Thails</h2>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="text-right">@DateTime.Now</h5>
+                    </div>
+                </div>
+                <div class="row invoice-info">
+                </div>
+                <div class="row">
+                    <div class="col-12 table-responsive">
+                        <table class="table">
+                            <tr>
+                               
+                                <th>
+                                    FoodName
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                   Sub Total
+                                </th>
+                                <th>
+                                    Sub Total
+                                </th>
+                                
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FoodName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td>@(item.Price * item.Quantity)</td>
+                                </tr>
+                            }
+
+                        </table>
+                
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><b>Total Amount:</b></label>
+                            </div>
+                            <div class="col-md-2">
+                                <b>@ViewBag.total</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,533 @@
+﻿@model IEnumerable<RMS2.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://codeseven.github.com/toastr/toastr.js"></script>
+<link rel="stylesheet" type="text/css" href="http://codeseven.github.com/toastr/toastr.css">
+
+<!--Loading font awesome icons.-->
+<script src="https://use.fontawesome.com/d94f445648.js"></script>
+
+
+<div class="app-title">
+    <div>
+        <h1><i class="fa fa-dashboard"></i> Employee</h1>
+        <p>Employee Details</p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a href="#">Employee</a></li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <button type="button" class="btn btn-info" data-toggle="modal" id="btnAdd">
+                    Add Employee <span class="fa fa-plus-square" aria-hidden="true"></span>
+                </button><br /><br />
+                <table class="table table-striped table-hover table-bordered" id="employeeTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmpCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ContactNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Position)
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmpCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Position)
+                                </td>
+                                <td>                            
+                                    <a class="btn btn-success" href="#" data-toggle="tooltip" data-placement="top" title="Edit" onclick="GetEmployeeDetails(@item.EmployeeID)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                    </a>
+                                    <a class="btn btn-info" href="#" data-toggle="tooltip" data-placement="left" title="View" onclick="GetEmployee(@item.EmployeeID)">
+                                        <i class="fa fa-pencil fa-lg"></i>
+                                    </a>
+                                    <a class="btn btn-danger btnDelete" style='color: #428bca;' data-toggle='tooltip' data-placement="right" title='Delete Employee' data-id="@item.EmployeeID" href='javascript:;'>
+                                        <i class="fa fa-trash-o fa-lg"></i>
+                                    </a>
+                                 
+                                    @*<a class='fa fa-pencil fa-lg' id="btnUpdateEmp" onclick="GetEmployee(@item.EmployeeID)" style='color: #428bca;' data-toggle='tooltip' title='Edit Employee' href='javascript:;'></a> |
+                                    <a class="fa fa-eye fa-lg" id="btnViewEmp" onclick="GetEmployeeDetails(@item.EmployeeID)" data-toggle='tooltip' title='View Employee' href='javascript:;'></a> |
+                                    <a class="fa fa-trash-o fa-lg btnDelete" style='color: #428bca;' data-toggle='tooltip' title='Delete Employee' data-id="@item.EmployeeID" href='javascript:;'></a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal.custom {
+        outline: none;
+    }
+
+        .modal.custom .modal-dialog {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+    .modal-header {
+        min-height: 16.428571429px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #009688;
+    }
+
+    .modal-title {
+        color: white;
+    }
+
+    .required:after {
+        margin: 2px;
+        content: "*";
+        color: red;
+    }
+</style>
+
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#employeeTable').DataTable({
+
+        });
+
+        $('#btnAdd').click(function () {
+            $('#txtEmpCode').val('');
+            $('#txtStatus').val('');
+            $('#txtFirstName').val('');
+            $('#txtLastName').val('');
+            $('#txtGender').val('');
+            $('#txtNicNo').val('');
+            $('#txtContactNo').val('');
+            $('#txtEmail').val('');
+            $('#txtAddress').val('');
+            $('#txtPosition').val('');
+            $('#modalTitle').text('Add Employee');
+            $('#btnUpdate').hide();
+            $('#employeeModal').modal('show');
+        });
+
+        $('#btnSave').click(function () {
+            var table = $('#employeeTable').DataTable()
+            if ($('#txtEmpCode').val() == '' ||
+                $('#txtStatus').val() == '' ||
+                $('#txtFirstName').val() == '' ||
+                $('#txtLastName').val() == '' ||
+                $('#txtGender').val() == '' ||
+                $('#txtNicNo').val() == '' ||
+                $('#txtContactNo').val() == '' ||
+                $('#txtEmail').val() == '' ||
+                $('#txtAddress').val() == '' ||
+                $('#txtPosition').val() == '') {
+
+                toastr.error("All the filelds are require!!!");
+            }
+            else {
+                var employeeObj = {
+                    EmpCode: $('#txtEmpCode').val(),
+                    Status: $('#txtStatus').val(),
+                    FirstName: $('#txtFirstName').val(),
+                    LastName: $('#txtLastName').val(),
+                    Gender: $('#txtGender').val(),
+                    NicNo: $('#txtNicNo').val(),
+                    ContactNo: $('#txtContactNo').val(),
+                    Email: $('#txtEmail').val(),
+                    Address: $('#txtAddress').val(),
+                    Position: $('#txtPosition').val(),
+                }
+                $.ajax({
+                    url: '/Employee/Save',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(employeeObj),
+                    success: function (response) {
+                        if (response.status) {
+                            toastr.success(response.message, "Message")
+                            table.row.add([$('#txtEmpCode').val(), $('#txtStatus').val(), $('#txtFirstName').val(),
+                            $('#txtLastName').val(), $('#txtGender').val(), $('#txtNicNo').val(),
+                            $('#txtContactNo').val(), $('#txtEmail').val(), $('#txtAddress').val(),
+                            $('#txtPosition').val()]).draw(false);
+                        }
+                    }
+                });
+                $('#employeeModal').modal('hide')
+            }
+
+        });
+
+        $('body').on('click', '.btnDelete', function () {
+            var $this = $(this);
+            alert('Are you sure you want to delete this record ?');
+            var table = $('#employeeTable').DataTable();
+            $.ajax({
+                url: "/Employee/Delete",
+                data: { ID: $($this).attr("data-id") },
+                type: "Post",
+                success: function (response) {
+                    toastr.error(response.message);
+                    table.row($($this).parents('tr'))
+                    .remove()
+                    .draw();
+                }
+            });
+        });
+
+        function Delete(id) {
+            var $this = $(this);
+            alert('Are you sure you want to delete this record?');
+            var table = $('#employeeTable').DataTable();
+
+            $.ajax({
+                url: '/Employee/Delete',
+                data: { ID: id },
+                type: 'post',
+                success: function (response) {
+                    toastr.error(response.message);
+                    table.row($(this).parent('tr'))
+                    .remove()
+                    .draw();
+
+                }
+            });
+        }
+
+        function GetEmployee(id) {
+            $.ajax({
+                url: "/Employee/GetEmployee",
+                data: { ID: id },
+                type: "Get",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "Json",
+                success: function (result) {
+                    $('#txtEmpID').val(result.data.EmployeeID);
+                    $('#txtEmpCode').val(result.data.EmpCode);
+                    $('#txtStatus').val(result.data.Status);
+                    $('#txtFirstName').val(result.data.FirstName);
+                    $('#txtLastName').val(result.data.LastName);
+                    $('#txtGender').val(result.data.Gender);
+                    $('#txtNicNo').val(result.data.NicNo);
+                    $('#txtContactNo').val(result.data.ContactNo);
+                    $('#txtEmail').val(result.data.Email);
+                    $('#txtAddress').val(result.data.Address);
+                    $('#txtPosition').val(result.data.Position);
+                    $('#btnSave').hide();
+                    $('#btnUpdate').show();
+                    $('#modalTitle').text("Update Employee");
+                    $('#employeeModal').modal('show');
+                }
+            })
+        }
+
+        function UpdateEmployee() {
+            var table = $('#employeeTable').DataTable();
+            var model = {
+                EmployeeID: $('#txtEmpID').val(),
+                EmpCode: $('#txtEmpCode').val(),
+                Status: $('#txtStatus').val(),
+                FirstName: $('#txtFirstName').val(),
+                LastName: $('#txtLastName').val(),
+                Gender: $('#txtGender').val(),
+                NicNo: $('#txtNicNo').val(),
+                ContactNo: $('#txtContactNo').val(),
+                Email: $('#txtEmail').val(),
+                Address: $('#txtAddress').val(),
+                Position: $('#txtPosition').val()
+            }
+            $.ajax({
+                url: "/Employee/UpdateEmployee",
+                type: "Post",
+                data: JSON.stringify(model),
+                contentType: "application/json; charset=UTF-8",
+                success: function (response) {
+                    toastr.success(response.message)
+                    table.row('selected').cell(':eq(0)').data($('#txtEmpCode').val()).draw();
+                    table.row('selected').cell(':eq(1)').data($('#txtStatus').val()).draw();
+                    table.row('selected').cell(':eq(2)').data($('#txtFirstName').val()).draw();
+                    table.row('selected').cell(':eq(3)').data($('#txtLastName').val()).draw();
+                    table.row('selected').cell(':eq(4)').data($('#txtGender').val()).draw();
+                    table.row('selected').cell(':eq(5)').data($('#txtNicNo').val()).draw();
+                    table.row('selected').cell(':eq(6)').data($('#txtContactNo').val()).draw();
+                    table.row('selected').cell(':eq(7)').data($('#txtEmail').val()).draw();
+                    table.row('selected').cell(':eq(8)').data($('#txtAddress').val()).draw();
+                    table.row('selected').cell(':eq(9)').data($('#txtPosition').val()).draw();
+
+                    $('#employeeModal').modal('toggle');
+
+                }
+            })
+        }
+
+        function GetEmployeeDetails(id) {
+            $.ajax({
+                url: "/Employee/GetEmployee",
+                data: { ID: id },
+                type: "Get",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "Json",
+                success: function (result) {
+                    $('#txtEmpDetailsID').val(result.data.EmployeeID);
+                    $('#txtEmpDetailsCode').val(result.data.EmpCode);
+                    $('#txtStatusDetails').val(result.data.Status);
+                    $('#txtFirstNameDetails').val(result.data.FirstName);
+                    $('#txtLastNameDetails').val(result.data.LastName);
+                    $('#txtGenderDetails').val(result.data.Gender);
+                    $('#txtNicNoDetails').val(result.data.NicNo);
+                    $('#txtContactNoDetails').val(result.data.ContactNo);
+                    $('#txtEmailDetails').val(result.data.Email);
+                    $('#txtAddressDetails').val(result.data.Address);
+                    $('#txtPositionDetails').val(result.data.Position);
+                    $('#modalDetailsTitle').text("Employee Details");
+                    $('#employeeDetailsModal').modal('show');
+                }
+            })
+        }
+
+    </script>
+}
+
+<!--Employee Modal -->
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="mConta">
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <span class="col-sm-3 control-label" id="txtEmpID"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label ">Employee Code:</label>
+                                <input type="text" class="form-control" id="txtEmpCode">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Status:</label>
+                                <input type="text" class="form-control" id="txtStatus">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">First Name:</label>
+                                <input type="text" class="form-control" id="txtFirstName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Last Name:</label>
+                                <input type="text" class="form-control" id="txtLastName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Gender:</label>
+                                <input type="text" class="form-control" id="txtGender">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">NicNo:</label>
+                                <input type="text" class="form-control" id="txtNicNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">ContactNo:</label>
+                                <input type="text" class="form-control" id="txtContactNo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Email:</label>
+                                <input type="text" class="form-control" id="txtEmail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Address:</label>
+                                <textarea type="text" class="form-control" id="txtAddress"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Position:</label>
+                                <input type="text" class="form-control" id="txtPosition">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Reset</button>
+                        <button type="button" id="btnSave" class="btn btn-success">Submit</button>
+                        <button type="button" id="btnUpdate" class="btn btn-success" onclick="UpdateEmployee()">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Employee Details Modal -->
+<div class="modal fade" id="employeeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalDetailsTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-inline" id="mConta">
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <span class="col-sm-3 control-label" id="txtEmpDetailsID"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name">Employee Code:</label>
+                                <input type="text" class="form-control-plaintext" id="txtEmpDetailsCode" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Status:</label>
+                                <input type="text" class="form-control-plaintext" id="txtStatusDetails" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">First Name:</label>
+                                <input type="text" class="form-control-plaintext" id="txtFirstNameDetails"readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Last Name:</label>
+                                <input type="text" class="form-control-plaintext" id="txtLastNameDetails"readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Gender:</label>
+                                <input type="text" class="form-control-plaintext" id="txtGenderDetails" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">NicNo:</label>
+                                <input type="text" class="form-control-plaintext" id="txtNicNoDetails" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">ContactNo:</label>
+                                <input type="text" class="form-control-plaintext" id="txtContactNoDetails" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                <input type="text" class="form-control-plaintext" id="txtEmailDetails" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Address:</label>
+                                <textarea type="text" class="form-control-plaintext" id="txtAddressDetails" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Position:</label>
+                                <input type="text" class="form-control-plaintext" id="txtPositionDetails" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>                      
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

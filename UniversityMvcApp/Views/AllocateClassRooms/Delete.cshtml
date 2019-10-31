@@ -1,0 +1,116 @@
+﻿@model UniversityMvcApp.Models.AllocateClassRoom
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AllocateClassRoom</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Course.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.RoomNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Room.RoomNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FinishTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FinishTime)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

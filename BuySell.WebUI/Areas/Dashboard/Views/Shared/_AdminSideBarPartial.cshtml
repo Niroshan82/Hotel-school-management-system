@@ -1,0 +1,54 @@
+﻿<style type="text/css">
+    .panel-default > .panel-heading {
+        color: #333;
+        background-color: #8dd190;
+        border-color: #ddd;
+    }
+
+
+
+    .sidebar-nav li a {
+        color: #0c0b0b;
+    }
+
+    .sidebar-nav > .sidebar-brand a {
+        color: #090808;
+    }
+    #sidebar-wrapper {
+       
+        background: #4ba5ed;
+       
+    }
+</style>
+
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            @Html.ActionLink("EventHandling - Admin", "Index", "Home", new { area = "Dashboard" }, new { @class = "navbar-brand" })
+        </li>
+        <li>
+            @Html.ActionLink("Web Home", "Index", "Home", new { area = "" }, null)
+        </li>
+        <li>
+            @Html.ActionLink("Educational Event", "Index", "Laptops")
+        </li>
+        <li>
+            @Html.ActionLink("Hotel Event", "Index", "CellPhones")
+        </li>
+        <li>
+            @Html.ActionLink("Company Event", "Index", "Bikes")
+        </li>
+        <li>
+            @Html.ActionLink("Normal User", "Index", "Sellers")
+        </li>
+        <li>
+            @Html.ActionLink("Reviews", "Index", "Reviews")
+        </li>
+        <li>
+            @Html.ActionLink("Roles", "Index", "Roles")
+        </li>
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->

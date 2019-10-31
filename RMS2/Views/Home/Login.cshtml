@@ -1,0 +1,315 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://codeseven.github.com/toastr/toastr.js"></script>
+<link rel="stylesheet" type="text/css" href="http://codeseven.github.com/toastr/toastr.css">
+<script src="~/scripts/jquery.validate.min.js"></script>
+<!--Loading font awesome icons.-->
+<script src="https://use.fontawesome.com/d94f445648.js"></script>
+<style>
+    header.header-cat {
+        background-image: url(/Assets/img/banner-1.jpg) !important;
+    }
+    #loginBtn{
+        margin-left:30%;
+    }
+        .modal.custom {
+        outline: none;
+    }
+
+        .modal.custom .modal-dialog {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+    .modal-header {
+        min-height: 16.428571429px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        background-color:#2a2c2d;
+    }
+
+    .modal-title {
+        color: white;
+    }
+
+    .required:after {
+        margin: 2px;
+        content: "*";
+        color: red;
+    }
+</style>
+
+<!-- HEADER
+           =================-->
+<header id="conent" class="header-cat">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Login or Signup</h1>
+            </div>
+        </div>
+    </div>
+</header><br /><br />
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12" id="loginBtn">
+            <button type="button" class="btn btn-success" data-toggle="modal" id="btnRegister">
+                Register Here <span class="fa fa-plus-square" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-info" data-toggle="modal" id="btnLogin">
+                Login Here <span class="fa fa-plus-square" aria-hidden="true"></span>
+            </button>
+        </div>
+    
+    </div>
+</div><br /><br />
+
+
+@section scripts{
+    <script>
+        $('#btnLogin').click(function () {
+            $('#txtUserName').val('');
+            $('#txtPassword').val('');
+            $('#loginModalTitle').text('Login Here');
+            $('#loginModal').modal('show');
+        });
+
+        $('#btnRegister').click(function () {
+            $('#txtFirstName').val('');
+            $('#txtLastName').val('');
+            $('#txtEmail').val('');
+            $('#txtContactNo').val('');
+            $('#txtAddress').val('');
+            $('#txtUserName').val('');
+            $('#txtPassword').val('');
+            $('#txtConfirmPassword').val('');
+            $('#registerModalTitle').text('Register Here');
+            $('#registerModal').modal('show');
+        });
+
+        $('#btnSubmit').click(function () {
+            if ($('#txtFirstName').val() == '' ||
+                $('#txtLastName').val() == '' ||               
+                $('#txtEmail').val() == '' ||
+                $('#txtContactNo').val() == '' ||
+                $('#txtAddress').val() == '' ||
+                $('#txtUserName').val() == ''||
+                $('#txtPassword').val() == ''||
+                $('#txtConfirmPassword').val() == '') {
+
+                toastr.error("All the filelds are require!!!");
+            }
+            else {
+                var customerObj = {
+                    FirstName: $('#txtFirstName').val(),
+                    LastName: $('#txtLastName').val(),
+                    Email: $('#txtEmail').val(),
+                    ContactNo: $('#txtContactNo').val(),
+                    Address: $('#txtAddress').val(),
+                    UserName: $('#txtUserName').val(),
+                    Password: $('#txtPassword').val(),
+                    ConfirmPassword: $('#txtConfirmPassword').val()
+                }
+                $.ajax({
+                    url: '/Home/Save',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(customerObj),
+                    success: function (response) {
+                        if (response.status) {
+                            toastr.success(response.message, "Message")
+                        }
+                    }
+                });
+                $('#registerModal').modal('hide')
+            }
+
+        });
+
+        $(document).ready(function () {
+            $('#btnlogin').click(function () {
+                if ($('#txtLoginUserName').val() == '' ||
+                $('#txtLoginPassword').val() == '') {
+
+                    toastr.error("User Name and Password are require!!!");
+                }
+                else
+                {
+                    var data = {
+                        "userName": $("#txtLoginUserName").val(),
+                        "password": $("#txtLoginPassword").val()
+                    };
+                    $.ajax({
+                        url: "/Home/ValidateUser",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (response) {
+                            if (response.Success) {
+                                $.get("@Url.Action("Index", "Order")", function (data) {
+                                    window.location = '@Url.Action("Index", "Order")'; 
+                                });
+                                toastr.success(response.message, "Message")
+                            }
+                            else {                            
+                            
+                                toastr.error(response.ErrormMssage, "Message")
+                            }
+                        
+                        },
+                        error: function () {
+                            console.log('Login Fail!!!');
+                        }
+                    });
+                }
+            });
+        });
+
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+        $(".validatedForm").validate({
+            rules: {
+                txtPassword: "required",
+                txtConfirmPassword: {
+                    equalTo: "#txtPassword"
+                }
+            }
+        });
+    </script>
+
+}
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="registerModalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal validatedForm" id="mConta">
+                    @*<div class="form-group">
+                        <div class="col-sm-9">
+                            <span class="col-sm-3 control-label" id="txtRegisterID"></span>
+                        </div>
+                    </div>*@
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">First Name:</label>
+                                <input type="text" class="form-control" id="txtFirstName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Last Name:</label>
+                                <input type="text" class="form-control" id="txtLastName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Email:</label>
+                                <input type="email" class="form-control" id="txtEmail">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Contact No:</label>
+                                <input type="tel" class="form-control" id="txtContactNo" maxlength="10">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Address:</label>
+                                <textarea type="text" class="form-control" id="txtAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">User Name:</label>
+                                <input type="text" class="form-control" id="txtUserName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Password:</label>
+                                <input type="password" name="txtPassword" class="form-control" id="txtPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="recipient-name" class="required col-form-label">Confirm Password:</label>
+                                <input type="password" class="form-control" name="txtConfirmPassword" id="txtConfirmPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Reset</button>
+                        <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="loginModalTitle"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="mConta">
+                        @*<div class="form-group">
+                            <div class="col-sm-9">
+                                <span class="col-sm-3 control-label" id="txtLoginID"></span>
+                            </div>
+                        </div>*@
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="required col-form-label ">User Name:</label>
+                                    <input type="text" class="form-control" id="txtLoginUserName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="required col-form-label">Password:</label>
+                                    <input type="password" class="form-control" id="txtLoginPassword">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btnlogin" class="btn btn-success">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

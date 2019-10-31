@@ -1,0 +1,16 @@
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\bin\Debug\BuySell.Contracts.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\bin\Debug\BuySell.Contracts.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\obj\Debug\BuySell.Contracts.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\obj\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\bin\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\bin\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\obj\Debug\BuySell.Contracts.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\obj\Debug\BuySell.Contracts.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\obj\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Contracts\obj\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\bin\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\bin\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\obj\Debug\BuySell.Contracts.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\obj\Debug\BuySell.Contracts.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\obj\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Contracts\obj\Debug\BuySell.Contracts.pdb

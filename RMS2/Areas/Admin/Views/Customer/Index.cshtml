@@ -1,0 +1,138 @@
+﻿@model IEnumerable<RMS2.Models.CustomerRegistration>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/scripts/jquery-3.3.1.min.js"></script>
+<div class="app-title">
+    <div>
+        <h1><i class="fa fa-dashboard"></i> Customer</h1>
+        <p>Customer Details</p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a href="#">Customer</a></li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <table class="table" id="customerTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ContactNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="#" data-toggle="tooltip" data-placement="left" title="View" onclick="view(@item.RegistrationID)">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                    </a>
+                                    <a class="btn btn-success" href="#" data-toggle="tooltip" data-placement="top" title="Confirm" onclick="editView(@item.RegistrationID)">
+                                        <i class="fa fa-pencil fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                   
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts{
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $('#customerTable').DataTable({
+
+        });
+
+        var view = function (customerId) {
+            var url = '@Url.Action("Details", "Customer")?id=' + customerId;
+
+            $("#popupModalBodyDiv").load(url, function () {
+                $('#modalTitle').text('View Customers');
+                $("#popupModal").modal('show');
+            })
+        }
+    </script>
+    }
+<style>
+    .modal.custom {
+        outline: none;
+    }
+
+        .modal.custom .modal-dialog {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+    .modal-header {
+        min-height: 16.428571429px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #009688;
+    }
+
+    .modal-title {
+        color: white;
+    }
+
+</style>
+<!--Add View Popup Modal-->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="popupModalBodyDiv">
+                @*popupPV*@
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@using RMS2.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (Session["customerID"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+}
+
+<style>
+    .card {
+        margin-top: 100px !important;
+        margin-left: 10px !important;
+    }
+
+    img {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        width: 150px;
+    }
+</style>
+<div class="row">
+    @foreach (Product p in ViewBag.listProduct)
+            {
+        <div class="card col-sm-2" style="width: 18rem; display:inline-block">
+            <img class="card-img-top" src="@Url.Content(p.Image)" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text"><h4>@p.ProductName</h4> </p>
+                <p class="card-text">@p.Price.00</p>
+                <p class="card-text">@p.Description</p>
+                <button class="btn btn-warning">@Html.ActionLink("Order Now", "OrderNow", "Shopping", new { id = p.ProductID }, null)</button>
+            </div>
+        </div><br /><br />
+    }
+</div>
+
+
+

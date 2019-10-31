@@ -1,0 +1,74 @@
+﻿
+@using RMS2.Models
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        margin-top: 100px !important;
+        margin-left: 10px !important;
+        width: 100px !important;
+    }
+
+    img {
+        border-radius: 8px;
+        width: 200px !important;
+        height: 180px !important;
+    }
+</style>
+
+<div class="row">
+    @foreach (Product p in ViewBag.listProduct)
+            {
+        <div class="card col-sm-2" style="width: 18rem; display:inline-block">
+            <img class="card-img-top" src="@Url.Content(p.Image)" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text"><h4>@p.ProductName</h4> </p>
+                <p class="card-text">Rs @p.Price .00 </p>
+                @*<p class="card-text">@p.Description</p>*@
+                <button class="btn btn-primary" onclick="view(@p.ProductID)">View Details</button>
+            </div>
+        </div><br /><br />
+    }
+</div>
+
+@section scripts{
+    <script>
+        var view = function (productId) {
+            var url = '@Url.Action("MenuPV", "Home")?id=' + productId;
+
+            $("#popupModalBodyDiv").load(url, function () {
+                $('#modalTitle').text('View Details');
+                $("#popupModal").modal('show');
+            })
+        }
+    </script>
+}
+<style>
+    .modal-header {
+        min-height: 16.428571429px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #2a2c2d;
+    }
+
+    .modal-title {
+        color: white;
+    }
+</style>
+<!-- View Popup Modal-->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="popupModalBodyDiv">
+                @*popupPV*@
+            </div>
+        </div>
+    </div>
+</div>

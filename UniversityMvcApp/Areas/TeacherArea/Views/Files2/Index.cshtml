@@ -1,0 +1,128 @@
+﻿
+
+@model UniversityMvcApp.Models.FileUpload
+
+
+@{
+    ViewBag.Title = "File Upload & Download";
+    Layout = "~/Areas/TeacherArea/Views/Shared/_Layout3.cshtml";
+
+}
+<style>
+    body {
+        background-image: url('../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+</style>
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+@using (Html.BeginForm("Index", "Files2", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-10">
+            <h2>File Upload</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Upload File</label>
+                <div class="col-md-10">
+                    <input type="file" id="files" name="files" class="form-control" required="required"><br />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Uploaded File Details</h2>
+        <div class="form-group">
+            <div>
+                @{
+                    var grid = new WebGrid(source: Model.FileList, canPage: true, rowsPerPage: 15);
+                    @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover", headerStyle: "webgrid-header",
+                        alternatingRowStyle: "webgrid-alternating-row", selectedRowStyle: "webgrid-selected-row",
+                        footerStyle: "webgrid-footer", rowStyle: "webgrid-row-style", mode: WebGridPagerModes.All,
+                        firstText: "<< First", previousText: "< Prev", nextText: "Next >", lastText: "Last >>",
+                        htmlAttributes: new { id = "DataTable" },
+                        columns: grid.Columns(
+                            grid.Column("FileName", header: "FILE NAME", canSort: false),
+                            grid.Column("FileUrl", header: "FILE PATH", canSort: false),
+                            grid.Column(header: "DOWNLOAD", format:
+                                                    @<text>
+                                                        <a href="~/Files/DownloadFile?
+                                                           filePath=@item.FileUrl"><img src="~/Areas/TeacherArea/Assets/images/download.png"  style="width: 15px; height: 15px" title="Download" /></a>
+                                                    </text>)
+          ));
+                }
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

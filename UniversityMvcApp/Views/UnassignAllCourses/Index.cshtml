@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "UnassignAllCourses";
+    string message = ViewBag.Successmessge;
+}
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+
+
+    #submit {
+        height: 50px;
+        width: 400px;
+        color: Background;
+        margin: 100px 100px 100px 200px;
+    }
+</style>
+@if (message != null)
+{
+    <label class="success">@message</label>
+}
+<form method="POST" id="myForm">
+
+    <table>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" id="submit" value="Unassign All Courses" height="20" width="30" class="btn btn-default" /></td>
+        </tr>
+    </table>
+
+</form>
+
+@*
+
+*@
+@section scripts{
+    <script>
+        $(document).ready(function
+            () {
+            $("#submit").click(function () {
+                var r = confirm("Are you sure to unassign all courses?");
+                if (r === false) {
+                    return false;
+                }
+
+            });
+        });</script>
+}

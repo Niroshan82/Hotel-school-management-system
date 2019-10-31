@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentResult</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+</head>
+
+<body>
+
+    <div class="heading2"> 
+        <center><h4>INSTITUTE OF HOTEL-SCHOOL MANAGEMENT SRI LANKA</h4></center>
+        <center><h4>Student Id: @ViewBag.StudentId</h4></center>
+       
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Course Code</td>
+                <td>Course Name</td>
+                <td>Subject Code</td>
+                <td>Subject Name</td>
+                <td>Course Grade</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var result in @ViewBag.Result)
+            {
+            <tr>
+                <td>@result.CourseCode</td>
+                <td>@result.Name</td>
+                <td>@result.SubjectCode</td>
+                <td>@result.SubjectName</td>
+                <td>@result.Grade</td>
+            </tr>
+
+            }
+
+
+        </tbody>
+
+    </table>
+</div>        @*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+    <script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js">  </script> *@
+    
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

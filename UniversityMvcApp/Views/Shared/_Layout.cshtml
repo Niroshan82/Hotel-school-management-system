@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Hotel-School Moodle</title>
+    @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Department<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Add Department", "Create", "Department")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Add Course", "Create", "Course")</li>
+                            <li>@Html.ActionLink("Course Assign To Teacher", "AssignCourse", "TeacherCourseAssign")</li>
+                            <li>@Html.ActionLink("View Course Statics", "Index", "ViewCourseStatics")</li>
+                            <li>@Html.ActionLink("View Class Schedule", "ViewCourseDetails", "ViewClassScheduleWithRoomAllocation")</li>
+                            <li>@Html.ActionLink(" Unassign All Courses", "Index", "UnassignAllCourses")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subject<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Add Subject", "Create", "Subjects")</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teacher<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Save Teacher", "Create", "Teacher")</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Register Student ", "Create", "Student")</li>
+                            <li>@Html.ActionLink("Enroll In a Course", "Add", "EnrollCourses")</li>
+                            <li>@Html.ActionLink("Save Students Result", "Save", "StudentResultSave")</li>
+                            <li>@Html.ActionLink("View Students Result", "ResultView", "ViewResult")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">ClassRoom<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Allocate Classrooms", "Create", "AllocateClassRooms")</li>
+                            <li>@Html.ActionLink("Unallocate All Classroom", "Index", "UnallocateAllClassroom")</li>
+                        </ul>
+                    </li>
+                    @if (Session["adminName"] == null)
+                    {
+                        <li class="nav navbar-nav navbar-left">
+
+
+
+                            @*<a class="nav-link js-scroll-trigger" href="@Url.Action("Index", "Login")"><span class="fa fa-user"></span>Logout</a>*@
+                            <a class="nav-link js-scroll-trigger" href="@Url.Action("Index", "Login", new { area="StudentArea"})"><span class="fa fa-user"></span>Logout</a>
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav navbar-nav nnavbar-right ">
+
+                            <span class="fa fa-user"></span>@Session["adminName"].ToString()
+
+                        </li>
+                        @*<li><a href="@Url.Action("Create", "Home", new { area=""})">Profile</a></li>*@
+                        <li class="nav navbar-nav nnavbar-right pull-right"><a href="@Url.Action("Logout", "Login",new { area="StudentArea"})">Logout</a></li>
+
+                    }
+
+                </ul>
+                  
+                
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year Hotel School Management-Moodle</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

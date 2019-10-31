@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "FeedBack";
+    Layout = "~/Views/Shared/_DigitalMenuCardLayoutPage.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://codeseven.github.com/toastr/toastr.js"></script>
+<link rel="stylesheet" type="text/css" href="http://codeseven.github.com/toastr/toastr.css">
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Rate Us</h4>
+                        <p class="card-category">Give your feedbacks here...!!!</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Name</label>
+                                        <input type="text" class="form-control" id="txtName">
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Comments</label>
+                                        <textarea type="text" class="form-control" id="txtComments"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Rating (Out of 5)</label>
+                                        <input type="text" class="form-control" id="txtRating">
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <button type="button" id="btnSave" class="btn btn-primary pull-right">Rate Us</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">Hotel-School</h6>
+                        <h4 class="card-title">veg and non veg</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Cardscripts{
+    <script>
+        $('#btnSave').click(function () {
+            if($('#txtName').val() == '' || $('#txtComments').val() == '' || $('#txtRating').val() == '')
+            {
+                toastr.error("All the filelds are require!!!");
+            }
+            else
+            {
+                var objectFeedback = {
+                    Name: $('#txtName').val(),
+                    Comments: $('#txtComments').val(),
+                    Rating: $('#txtRating').val()
+                }
+                $.ajax({
+                    url: '/DigitalMenuCard/SaveFeedBack',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(objectFeedback),
+                    success: function (response) {
+                        if (response.status) {
+                            toastr.success(response.message, "Message")
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    
+    }

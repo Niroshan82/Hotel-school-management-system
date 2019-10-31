@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Areas/TeacherArea/Views/Shared/_Layout3.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Horizontal parallax sliding slider  with Swiper.js</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'>
+    @*<link rel="stylesheet" href="../Assets/css/style.css">*@
+
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+
+    <style>
+
+
+
+        .navbar-inverse {
+            background-color: #0aadf6;
+            border-color: #03A9F4;
+        }
+
+            .navbar-inverse .navbar-toggle {
+                border-color: #2f39db;
+            }
+
+
+
+                .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                    background-color: #3775e1;
+                }
+
+            .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+                border-color: #212ef3;
+            }
+
+            .navbar-inverse .navbar-nav > li > a {
+                color: #000;
+            }
+
+            .navbar-inverse .navbar-nav > li > a {
+                color: #000000;
+            }
+
+            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+                color: #fff;
+                background-color: #2982eb;
+            }
+
+
+        .header {
+            padding-bottom: 20px;
+            margin: initial;
+        }
+
+        .row {
+            margin: auto;
+        }
+    </style>
+
+
+</head>
+<br />
+<br />
+<br />
+<br />
+
+
+<body style="padding-top:unset; padding-bottom:unset">
+    <div class="header">
+
+        @* <img src="../Assets/img/hotel-school-logo1A.jpg" class="img-responsive" alt="W3Schools.com" width="1140">*@
+        <img src="~/Assets/img/hotel-school-logo1A.jpg" class="img-responsive" alt="W3Schools.com" width="1140">
+    </div>
+
+    <div class="swiper-container main-slider loading">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                @*<figure class="slide-bgimg" style="background-image:url(../Assets/img/A.jpg)">
+                        <img src="../Assets/img/A.jpg" class="entity-img" />
+                    </figure>*@
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/A.jpg')">
+                    <img src="~/Assets/img/A.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">customer placing</p>
+                    <span class="caption"></span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/B.jpg')">
+                    <img src="~/Assets/img/B.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Graduation</p>
+                    <span class="caption"></span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/C.jpg')">
+                    <img src="~/Assets/img/C.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Traditional Events</p>
+                    <span class="caption"></span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/D.jpg')">
+                    <img src="~/Assets/img/D.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Lecture Hall</p>
+                    <span class="caption"></span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/E.jpg')">
+                    <img src="~/Assets/img/E.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Events</p>
+                    <span class="caption"></span>
+                </div>
+            </div>
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev swiper-button-white"></div>
+        <div class="swiper-button-next swiper-button-white"></div>
+    </div>
+    <!-- Thumbnail navigation -->
+    <div class="swiper-container nav-slider loading">
+        <div class="swiper-wrapper" role="navigation">
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/A.jpg')">
+                    <img src="~/Assets/img/A.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">customer placing</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/B.jpg')">
+                    <img src="~/Assets/img/B.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Graduation</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/C.jpg')">
+                    <img src="~/Assets/img/C.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Traditional Events</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/D.jpg')">
+                    <img src="~/Assets/img/D.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Lecture Hall</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <figure class="slide-bgimg" style="background-image:url('/Assets/img/E.jpg')">
+                    <img src="~/Assets/img/E.jpg" class="entity-img" />
+                </figure>
+                <div class="content">
+                    <p class="title">Events</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js'></script>
+
+    <script src="~/Assets/js/script.js"></script>
+
+
+</body>
+</html>
+

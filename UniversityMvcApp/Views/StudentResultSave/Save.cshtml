@@ -1,0 +1,257 @@
+﻿@model UniversityMvcApp.Models.EnrollCourses
+@{
+    ViewBag.Title = "Save";
+    string saveMessage = @ViewBag.saveMessage;
+}
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<style>
+    body {
+        background-image: url('../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+</style>
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+<h2>Save</h2>
+
+@*@Html.Hidden("RedirectTo", Url.Action("Save", "StudentResultSave"));*@
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            alert(@Html.Raw(Json.Encode(TempData["message"])));
+            //var url = $("#RedirectTo").val();
+            //location.href = url;
+        </script>
+    }
+}
+
+
+@if (saveMessage != null)
+{
+    <label class="label-success">@saveMessage</label>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("studentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="studentId" id="studentId">
+                    <option>--Select--</option>
+                    @foreach (var students in ViewBag.StudentId)
+                    {
+                        <option value="@students.Id">@students.RegistrationSerial</option>
+                    }
+
+                </select>
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Student Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="studentName" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Department Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="departmentName" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseId, "CourseCode", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="CourseId" id="CourseId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, "Subject", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SubjectID", "--Select--")
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Grade,
+    new { @class = "control-label col-md-2" }
+    ) <div class="col-md-10">
+                <select name="Grade" id="Grade">
+                    <option>--Select--</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="C+">C+</option>
+                    <option value="C">C</option>
+                    <option value="C-">C-</option>
+                    <option value="D+">D+</option>
+                    <option value="D">D</option>
+                    <option value="D-">D-</option>
+                    <option value="F">F</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Grade)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enroll" onclick="javascript:ShowPopup();" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+@*
+
+
+
+
+*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            //var table = $("#myTable").DataTable();
+            $("#studentId").change(function () {
+                var stId = $("#studentId").val();
+                //$("#myTable").show();
+                //table.clear().draw(false);
+                //$("#tableBody").empty();
+
+                $("#CourseId").empty();
+                $("#CourseId").append('<option value="">Select</option>');
+                var json = { studentId: stId };
+                //alert(deptId);
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResultSave/GetCourseByStudentId2',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+
+                        $.each(data, function (key, value) {
+
+                            //alert(key);
+                            $("#CourseId").append('<option value="' + value.Id + '">' + value.Code + '</option>');
+
+                            //$("#tableBody").append('<tr><td>' + value.StudentId + '</td><td>' + value.Name + '</td><td>' + value.DepartmentId + '</td></tr>');
+                            //table.row.add([
+                            //    value.StudentId, value.Name, value.DepartmentId
+                            //]).draw(false);
+                        });
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $("#studentId").change(function () {
+                var stId = $("#studentId").val();
+
+
+                var json = { studentId: stId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResultSave/GetStudentByStudentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+
+
+                        $("#studentName").val(data);
+
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+
+                $("#studentId").change(function () {
+                    var stId = $("#studentId").val();
+
+
+                    var json = { studentId: stId };
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/StudentResultSave/GetDepartmentNameByStudentId',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function (data) {
+
+
+                            $("#departmentName").val(data);
+
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}
+

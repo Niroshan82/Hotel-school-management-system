@@ -1,0 +1,103 @@
+﻿@model BuySell.WebUI.Models.CellPhoneAdViewModel
+
+@{
+    ViewBag.Title = Html.DisplayFor(model => model.Title);
+}
+
+<style type="text/css">
+    body {
+        background-image: url('../../images/niro-se-bc-images.jpg');
+        margin: 0;
+        color: #0cffe9;
+    }
+    .panel-body {
+        color: #795548;
+    }
+</style>
+
+<a type="button" class="btn btn-success btn-lg pull-right" href="@Url.Action("Index", "CellPhoneAds")">Hotel Events</a>
+<h2>@Model.Title</h2>
+<hr />
+
+<div class="row">
+    @Html.Partial("_CategoriesPartial")
+
+    <div class="col-md-9">
+
+        <div class="thumbnail">
+            <img title="@Model.Title" class="img-responsive" src="~/images/@Model.Images.First().Path" alt="@Model.Title" />
+            <div class="caption-full">
+                <h4 title="@Model.Currency.Name : @Model.Price" class="pull-right">@Html.DisplayFor(model => model.Currency.Name) @Html.DisplayFor(model => model.Price)</h4>
+                <h4 title="@Model.Title">
+                    @Html.DisplayFor(model => model.Title)
+                </h4>
+                <p>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.Label("Event-Kind")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AccessoryBrand.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Event-President")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.OperatingSystem)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Event-Size")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Condition.ConditionType)
+                        </dd>
+                        <dt>
+                            @Html.Label("Admin")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Seller.Name)
+                        </dd>
+                        <dt>
+                            @Html.Label("Location")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.City.Name), @Html.DisplayFor(model => model.State.Name), @Html.DisplayFor(model => model.Country.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Contact")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Seller.MobileNumber)
+                        </dd>
+                        <dt>
+                            @Html.Label("Posted On")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PostingTime)
+                        </dd>
+                    </dl>
+                </p>
+
+                <p>@Html.DisplayFor(model => model.Description)</p>
+            </div>
+
+            <div class="ratings">
+                <p>@Model.Reviews.Count Reviews</p>
+            </div>
+        </div>
+
+        @Html.Partial("_CellPhoneAdControlReviewPartial")
+
+        @Html.Partial("_ReviewsPartial")
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

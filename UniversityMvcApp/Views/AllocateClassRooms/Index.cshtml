@@ -1,0 +1,209 @@
+﻿@model IEnumerable<UniversityMvcApp.Models.AllocateClassRoom>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    body {
+        background-image: url('../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+   
+</style>
+
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+
+
+
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+
+            alert(@Html.Raw(Json.Encode(TempData["message"])));
+
+
+        </script>
+    }
+    @*else if (TempData["Add"] != null)
+        {
+            <script type="text/javascript">
+
+                alert(@Html.Raw(Json.Encode(TempData["Add"])));
+
+            </script>
+        }*@
+}
+
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#AllocateClassRoomTable').DataTable({
+
+        });
+
+
+        function GetEmployee(id) {
+            $.ajax({
+                url: "/Employee/GetEmployee",
+                data: { ID: id },
+                type: "Get",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "Json",
+                success: function (result) {
+                    $('#txtEmpID').val(result.data.EmployeeID);
+                    $('#txtEmpCode').val(result.data.EmpCode);
+                    $('#txtStatus').val(result.data.Status);
+                    $('#txtFirstName').val(result.data.FirstName);
+                    $('#txtLastName').val(result.data.LastName);
+                    $('#txtGender').val(result.data.Gender);
+                    $('#txtNicNo').val(result.data.NicNo);
+                    $('#txtContactNo').val(result.data.ContactNo);
+                    $('#txtEmail').val(result.data.Email);
+                    $('#txtAddress').val(result.data.Address);
+                    $('#txtPosition').val(result.data.Position);
+                    $('#btnSave').hide();
+                    $('#btnUpdate').show();
+                    $('#modalTitle').text("Update Employee");
+                    $('#employeeModal').modal('show');
+                }
+            })
+        }
+
+    </script>
+    }
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("DepCode")
+        </th>
+        <th>
+            @Html.DisplayName("CourseCode")
+        </th>
+        <th>
+            @Html.DisplayName("SubjectCode")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Room.RoomNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.TO)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishTime)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.RoomNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.TO)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishTime)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                @*<button type="submit" value="Delete" class="btn-danger btnDelete" data-id="@item.Id">Delete</button>*@
+
+
+                <input type="button" class="btn btn-success" title="Update" value="Update" onclick="location.href='@Url.Action("Edit", "AllocateClassRooms", new { id = item.Id })'" />|
+                <input type="button" class="btn btn-danger" title="Delete" value="Delete" onclick="location.href='@Url.Action("Delete", "AllocateClassRooms", new { id = item.Id })'" />
+
+            </td>
+        </tr>
+    }
+</table>

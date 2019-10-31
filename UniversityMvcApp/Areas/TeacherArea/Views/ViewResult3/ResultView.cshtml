@@ -1,0 +1,232 @@
+﻿@model UniversityMvcApp.Models.EnrollCourses
+@{
+    ViewBag.Title = "ResultView";
+}
+
+<style>
+    body {
+        background-image: url('../../../../Assets/img/bk-image.jpg');
+        color: #000000;
+        margin: 0;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #FF5722;
+        }
+</style>
+
+
+<style>
+
+
+
+    .navbar-inverse {
+        background-color: #0aadf6;
+        border-color: #03A9F4;
+    }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #2f39db;
+        }
+
+
+
+            .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                background-color: #3775e1;
+            }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            border-color: #212ef3;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #2982eb;
+        }
+
+
+    .header {
+        padding-bottom: 20px;
+        margin: initial;
+    }
+
+    .row {
+        margin: auto;
+    }
+</style>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<h2>ResultView</h2>
+@using (Html.BeginForm("UrlAsPDF", "ViewResult2"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("StudentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="StudentId" id="StudentId">
+                    <option>--Select--</option>
+                    @foreach (var students in ViewBag.StudentId)
+                    {
+                        <option value="@students.Id">@students.RegistrationSerial</option>
+                    }
+
+                </select>
+                @Html.ValidationMessageFor(model => model.StudentId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Student Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="studentName" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Department Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="departmentName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Make Pdf" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <table id="myTable" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Course  Code</th>
+                    <th>Course Name</th>
+                    <th>Subject  Code</th>
+                    <th>Subject Name</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+    <script>
+$(document).ready(function () {
+
+                $("#StudentId").change(function () {
+                    var stId
+                    = $("#StudentId").val();
+
+
+                    var json
+                    = { studentId: stId }
+                    ; $.ajax(
+                    {
+                        type: "POST",
+                        url: '/ViewResult2/GetStudentByStudentId',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function
+                    (data) {
+
+
+                            $("#studentName").val(data);
+
+                        }
+                    }
+                    );
+                }
+                );
+            });
+            $(document).ready(function
+            () {
+
+                $("#StudentId").change(function () {
+                    var stId
+                    = $("#StudentId").val();
+
+
+                    var json
+                    = { studentId: stId }
+                    ; $.ajax(
+                    {
+                        type: "POST",
+                        url: '/ViewResult2/GetDepartmentNameByStudentId',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function
+                        (data) {
+
+
+                            $("#departmentName").val(data);
+
+                        }
+                    }
+                    );
+                }
+                );
+            }
+       );
+
+            $(document).ready(function
+        () {
+
+                $("#StudentId").change(function () {
+                    var deptId
+                    = $("#StudentId").val();
+
+                    $("#myTable").show(); $("#tableBody").empty();
+                    var json
+                    = { studentId: deptId }
+                    ; $.ajax(
+                    {
+                        type: "POST",
+
+                        url: '/ViewResult2/GetResultTableByStudent',
+
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function
+                    (data) {
+                            alert(deptId); $.each(data,
+                            function (key,
+                            value) {
+                                alert(data); $("#tableBody").append('<tr><td>'
+                                + value.CourseCode
+                                + '</td><td>'
+                                + value.Name
+                                + '</td><td>'
+                                + value.SubjectCode
+                                + '</td><td>'
+                                + value.SubjectName
+                                + '</td><td>'
+                                + value.Grade
+                                + '</td></tr>');
+                            }
+                            );
+                        }
+                    }
+                    );
+                }
+                );
+            }
+           );</script>
+}

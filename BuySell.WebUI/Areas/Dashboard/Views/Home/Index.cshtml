@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Admin Home";
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <style>
+        .tbl_style td {
+            text-align: center;
+            border-bottom: 1px solid #CDCDCD;
+            padding: 23px;
+        }
+
+
+
+        #contenitore {
+            position: relative;
+            width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            overflow: hidden;
+            font: 14px 'Trebuchet MS', sans serif;
+        }
+
+        .left {
+            float: left;
+            width: 48%;
+        }
+
+        #grafico {
+            position: relative;
+            height: 300px;
+            border-left: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .riga {
+            position: absolute;
+            left: 0;
+            height: 1px;
+            background-color: gray;
+            width: 100%;
+        }
+
+            .riga div {
+                float: left;
+                margin: -8px 0 0 -40px;
+            }
+
+        .canc {
+            clear: both;
+        }
+
+        table {
+            width: 60%;
+            background-color: white;
+            color: #000;
+            margin: 1em auto;
+        }
+
+            table caption {
+                background-color: #D8EED8;
+                color: #004156;
+                text-align: left;
+            }
+
+            table tr:nth-child(2n) {
+                background-color: #D8EED8;
+            }
+
+            table tr:nth-child(2n+1) {
+                background-color: #BFDFFF;
+            }
+
+            table td {
+                text-align: center;
+                border-bottom: 1px solid #CDCDCD;
+                padding: 6px;
+            }
+
+        .column {
+            position: absolute;
+            width: 16%;
+            bottom: 0;
+            background-color: #003366;
+            margin-left: 5%;
+        }
+
+        div.button {
+            margin: 0 auto;
+            text-align: center;
+            width: 100px;
+            background-color: #003366;
+            border: 1px solid #003366;
+            border-radius: 5px;
+            padding: 8px;
+            color: #E1E2CF;
+            cursor: pointer;
+        }
+
+        .column div {
+            margin-top: -20px;
+            height: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        function viewGraph() {
+            $('.column').css('height', '0');
+            $('table tr').each(function (index) {
+                var ha = $(this).children('td').eq(1).text();
+                $('#col' + index).animate({ height: ha }, 1500).html("<div>" + ha + "</div>");
+            });
+        }
+        $(document).ready(function () {
+            viewGraph();
+        });
+
+
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work', 8],
+                ['Eat', 2],
+                ['TV', 4],
+                ['Gym', 2],
+                ['Sleep', 8]
+            ]);
+
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': 'My Average Day', 'width': 550, 'height': 400 };
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Event Handling Dashboard</h1>
+
+    <div id="piechart"></div>
+    <div id="contenitore">
+        <div class="left">
+
+            <table class="tbl_style">
+                <caption>Date table</caption>
+                <tbody>
+                    <tr><td>Educational Event</td><td>80%</td><td style="background-color:#336699">&nbsp;</td></tr>
+                    <tr><td>Hotel Event</td><td>68%</td><td style="background-color:#003366">&nbsp;</td></tr>
+                    <tr><td>Company Event</td><td>30%</td><td style="background-color:#ff6600">&nbsp;</td></tr>
+                    <tr><td>Other</td><td>20%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+                </tbody>
+            </table>
+            <div class="button" onclick="viewGraph()">GetGraph</div>
+        </div>
+        <div class="left">
+            <div id="grafico">
+                <div class="riga" style="top:25%"><div>75%</div></div>
+                <div class="riga" style="top:50%"><div>50%</div></div>
+                <div class="riga" style="top:75%"><div>25%</div></div>
+                <div id="col0" style="left:0; background-color:#336699;" class="column"></div>
+                <div id="col1" style="left:25%; background-color:#003366;" class="column"></div>
+                <div id="col2" style="left:50%; background-color:#ff6600;" class="column"></div>
+                <div id="col3" style="left:75%; background-color:#ffcc00;" class="column"></div>
+            </div>
+        </div>
+        <div class="canc"></div>
+        <div style="margin: 20px auto; text-align:center;">Hotel-School Event Handling Dashbord</div>
+    </div>
+
+
+</body>
+</html>

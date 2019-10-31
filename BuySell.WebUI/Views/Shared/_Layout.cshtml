@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Event Handling</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        .navbar-inverse {
+            background-color: #0aadf6;
+            border-color: #03A9F4;
+        }
+
+            .navbar-inverse .navbar-toggle {
+                border-color: #2f39db;
+            }
+
+
+
+                .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+                    background-color: #3775e1;
+                }
+
+            .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+                border-color: #212ef3;
+            }
+
+            .navbar-inverse .navbar-nav > li > a {
+                color: #000;
+            }
+
+            .navbar-inverse .navbar-nav > li > a {
+                color: #000000;
+            }
+
+            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+                color: #fff;
+                background-color: #2982eb;
+            }
+
+
+        .header {
+            padding-bottom: 20px;
+            margin: initial;
+        }
+
+        .row {
+            margin: auto;
+        }
+
+        
+        .navbar-inverse .navbar-brand:focus {
+            color: #000000;
+            background-color: transparent;
+        }
+        .navbar-inverse .navbar-brand {
+            color: #000000;
+        }
+
+        .panel-default > .panel-heading {
+            color: #333;
+            background-color: #edbe48;
+            border-color: #ddd;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Event Handling", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    
+                    @if (User.IsInRole("Admin,Manager"))
+                    {
+                        <li>@Html.ActionLink("Admin Dashboard", "Index", "Home", new { area = "Dashboard" }, null)</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Event Handling</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

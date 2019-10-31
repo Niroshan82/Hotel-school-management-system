@@ -1,0 +1,52 @@
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.DAL.dll.config
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.DAL.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.DAL.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.Contracts.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.Models.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\EntityFramework.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.Contracts.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\BuySell.Models.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\EntityFramework.xml
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.csprojResolveAssemblyReference.cache
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.UpdateDBDALCompleted.resources
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.GenerateResource.Cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.DAL.dll.config
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.DAL.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.DAL.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\EntityFramework.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\BuySell.Models.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\EntityFramework.xml
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.UpdateDBDALCompleted.resources
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.GenerateResource.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.CopyComplete
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.DAL\obj\Debug\BuySell.DAL.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.DAL.dll.config
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.DAL.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.DAL.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.Contracts.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\EntityFramework.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.Contracts.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\BuySell.Models.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\EntityFramework.xml
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.CopyComplete
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.test2.resources
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.GenerateResource.cache

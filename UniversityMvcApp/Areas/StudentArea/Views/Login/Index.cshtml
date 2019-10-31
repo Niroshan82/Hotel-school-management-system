@@ -1,0 +1,254 @@
+﻿@model UniversityMvcApp.Models.User
+
+@{
+    Layout = null;
+}
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+
+
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.js"></script>
+
+@*<script type="text/javascript" src="~/Areas/StudentArea/Assets/js/jquery-3.3.1.min.js"></script>*@
+
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+@*<script  src="@Url.Content(~/Scripts/jquery-3.3.1.min.js")"></script>*@
+
+@*<script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>*@
+
+
+
+@*<script>
+
+        $('#btnLogin').click(function () {
+            $('#txtUserName').val('');
+            $('#txtPassword').val('');
+            $('#loginModalTitle').text('Login Here');
+            $('#loginModal').modal('show');
+    });
+
+
+       // var myForm = $('#myForm');
+
+
+
+
+         $(document).ready(function () {
+            $('#btnlogin').click(function () {
+            if ($('#txtLoginUserName').val() == '' ||
+                $('#txtLoginPassword').val() == '') {
+
+                toastr.error("User Name and Password are require!!!");
+            }
+                else
+                {
+                var data = {
+                        "userName": $("#txtLoginUserName").val(),
+                        "password": $("#txtLoginPassword").val()
+                    };
+                    $.ajax({
+            url: "/Login/Create",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (response) {
+                    if (response.Success) {
+                                $.get("@Url.Action("Index", "Home2")", function (data) {
+                            window.location = '@Url.Action("Index", "Home2")';
+                        });
+                        toastr.success(response.message, "Message")
+                            }
+                    else {
+
+                        toastr.error(response.ErrormMssage, "Message")
+                            }
+
+                },
+                        error: function () {
+                    console.log('Login Fail!!!');
+                }
+            });
+        }
+    });
+});
+
+
+
+</script>*@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .custom-select {
+            max-width: 112%;
+        }
+    </style>
+
+    <title>Login V15</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+
+    <link rel="icon" type="image/png" href="~/Areas/StudentArea/Assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/StudentArea/Assets/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-form-title" style="background-image:url('/Areas/StudentArea/Assets/images/bg-01.jpg');  background-repeat:no-repeat">
+                    <span class="login100-form-title-1">
+                        Sign In
+                    </span>
+                </div>
+
+                @*@using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+                    {*@
+
+                @*<form action="Create/LoginController" method="POST" id="myForm" class="login100-form validate-form">*@
+
+                    <form action="@Url.Action("Create","Login")" method="POST" id="myForm" class="login100-form validate-form">
+
+
+                        
+                        @*<span class="label-input100">Username</span>
+            <input class="input100" type="text" id="txtLoginUserName" name="username" placeholder="Enter username">
+                <span class="focus-input100"></span>*@
+                        @*<span class="label-input100">User Type</span>*@
+                        <div class="col-lg-2">
+                            <label class="label-input100">UserType</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <select class="custom-select" style="width:600px;" name="UserType" id="UserType">
+                                <option value="1">Admin</option>
+                                <option value="2">Student</option>
+                                <option value="3">Teacher</option>
+                            </select>
+                        </div>
+                        @*<div class="col-lg-6">
+
+            </div>*@
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+
+
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                            <span class="label-input100">Username</span>
+                            @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName)*@
+                            <input class="input100" type="text" id="txtLoginUserName" name="username" placeholder="Enter username">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <br>
+                        <br>
+
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                            <span class="label-input100">Password</span>
+                            @*@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password)*@
+                            <input class="input100" type="password" id="txtLoginPassword" name="password" placeholder="Enter password">
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color:red;">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="flex-sb-m w-full p-b-30">
+                            <div class="contact100-form-checkbox">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <label class="label-checkbox100" for="ckb1">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div>
+                                <a href="#" class="txt1">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="container-login100-form-btn">
+                            <button type="submit" id="btnlogin" value="SIGN IN" class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+
+                    @*}*@
+</div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--===============================================================================================-->
+    @*<script src="~/Areas/StudentArea/Assets/vendor/jquery/jquery-3.2.1.min.js"></script>*@
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Areas/StudentArea/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Areas/StudentArea/Assets/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Areas/StudentArea/Assets/js/main.js"></script>
+
+</body>
+</html>

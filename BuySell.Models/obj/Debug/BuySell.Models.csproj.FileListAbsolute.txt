@@ -1,0 +1,17 @@
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\bin\Debug\BuySell.Models.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\bin\Debug\BuySell.Models.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.dll
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.csprojResolveAssemblyReference.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\bin\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\bin\Debug\BuySell.Models.pdb
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\obj\Debug\BuySell.Models.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\obj\Debug\BuySell.Models.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\obj\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\Project-too-related-videos\Event-Manage\BuySell-master\BuySell.Models\obj\Debug\BuySell.Models.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\bin\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\bin\Debug\BuySell.Models.pdb
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\obj\Debug\BuySell.Models.csprojAssemblyReference.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\obj\Debug\BuySell.Models.csproj.CoreCompileInputs.cache
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\obj\Debug\BuySell.Models.dll
+D:\4thyear_1stSemi\Project\MyFinalYearProject\kethisBro\Final Year Project\Final Project development\RMS2\BuySell.Models\obj\Debug\BuySell.Models.pdb

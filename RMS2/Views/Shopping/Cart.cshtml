@@ -1,0 +1,71 @@
+﻿@using RMS2.Controllers
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .button {
+        color: white;
+    }
+</style>
+<header id="conent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Your Orders</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="card col-lg-12" display:inline-block">
+            <div class="card-body">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered col-md-8">
+                        <tr>
+                            @*<th>ID</th>*@
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                            <th>Cancel</th>
+                        </tr>
+                        @{
+                            float s = 0;
+                        }
+                        @foreach (Item item in (List<Item>)Session["cart"])
+                        {
+                            s = s + (item.Pr.Price * item.Quantity);
+                            <tr>
+                                @*<td>@item.Pr.ProductID</td>*@
+                                <td>@item.Pr.ProductName</td>
+                                <td>@item.Pr.Price.00</td>
+                                <td>@item.Quantity</td>
+                                <td>@(item.Pr.Price * item.Quantity).00</td>
+                                <td>@Html.ActionLink("Delete Item", "Delete", "Shopping", new { id = item.Pr.ProductID }, null)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td align="right" colspan="4">Total</td>
+                            <td>@s.00</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-warning btn-large">@Html.ActionLink("Continue Order", "Index", "Order")</button>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        @Html.ActionLink("Check Out", "ckout", "Shopping", new { total = s, name = Session["customerName"] }, new { @class = "btn btn-success btn-large pull-right" })
+                        @Html.ActionLink("Cancel Order", "DeleteOrder", "Shopping", new { @class = "btn btn-danger btn-large pull-right" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><br />
